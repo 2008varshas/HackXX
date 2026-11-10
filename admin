@@ -1,0 +1,114 @@
+import { Link } from "react-router-dom";
+import { ArrowRight, Brain, Building2, Map, ShieldCheck, Users, WifiOff } from "lucide-react";
+import PublicHeader from "@/components/landing/PublicHeader";
+import SiteFooter from "@/components/landing/SiteFooter";
+
+const PILLARS = [
+  { icon: ShieldCheck, title: "Verification before action", body: "Community members confirm, dispute or add detail. Only an administrator can mark an incident verified — no report becomes 'true' by popularity." },
+  { icon: WifiOff, title: "Built for real networks", body: "Reports draft offline and sync when connectivity returns, with a clear pending state so nobody is told help is on the way when it isn't." },
+  { icon: Map, title: "One map, one truth", body: "Incidents, resources and relief stock share coordinates and statuses, so responders stop reconciling three spreadsheets during an emergency." },
+  { icon: Users, title: "People as infrastructure", body: "Volunteers declare skills and availability; administrators assign them to the incidents where they actually help." },
+];
+
+const STAGES = [
+  ["Report", "A citizen reports an emergency with category, location, people affected and optional photo."],
+  ["Confirm", "Nearby members see a privacy-protected summary and add independent signals."],
+  ["Verify", "An administrator reviews evidence, sets severity and official status."],
+  ["Coordinate", "Volunteers, resources and relief stock are matched, and every update is timestamped."],
+  ["Resolve", "The incident closes with a recorded outcome the reporter can follow."],
+];
+
+export default function About() {
+  return (
+    <div className="flex min-h-screen w-full flex-col bg-background">
+      <PublicHeader />
+      <main className="flex-1">
+        <section className="w-full bg-navy-900 py-14 text-white sm:py-20">
+          <div className="mx-auto w-full max-w-[1100px] px-5 sm:px-8">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-signal-300">About RAKSHA360</p>
+            <h1 className="mt-3 max-w-3xl font-display text-[clamp(1.9rem,4vw,3rem)] font-medium leading-[1.06] tracking-tight">
+              Emergency information should be trustworthy before it is fast.
+            </h1>
+            <p className="mt-5 max-w-2xl text-[14.5px] leading-relaxed text-white/70">
+              RAKSHA360 is a centralised response layer between citizens, administrators, volunteers,
+              hospitals and relief providers. It treats a report as a claim that must be verified —
+              not a fact to broadcast.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              <Link to="/report" className="inline-flex items-center gap-2 rounded-full bg-signal-600 px-5 py-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-white hover:bg-signal-700">
+                Report an emergency <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link to="/safety" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-3 text-[12px] font-medium uppercase tracking-[0.12em] text-white hover:bg-white/10">
+                Safety guidelines
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-[1100px] px-5 py-12 sm:px-8 sm:py-16">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {PILLARS.map((p) => (
+              <article key={p.title} className="rounded-xl border border-border bg-card p-5">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-signal-50 text-signal-600 dark:bg-signal-950/40 dark:text-signal-300">
+                  <p.icon className="h-4 w-4" />
+                </span>
+                <h2 className="mt-3 text-[14.5px] font-semibold text-navy-900 dark:text-white">{p.title}</h2>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{p.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+            <div>
+              <h2 className="font-display text-[clamp(1.4rem,2.6vw,2rem)] font-medium leading-tight tracking-tight text-navy-900 dark:text-white">
+                The five stages of an incident
+              </h2>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-muted-foreground">
+                Every stage writes a timestamped entry to the incident history, so a citizen tracking
+                their report can see exactly what changed and who changed it.
+              </p>
+              <div className="mt-5 rounded-xl border border-border bg-card p-4">
+                <p className="flex items-center gap-2 text-[12.5px] font-semibold text-foreground">
+                  <Brain className="h-4 w-4 text-signal-600" /> Where AI is allowed to help
+                </p>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-muted-foreground">
+                  AI suggests a category, severity and possible duplicates, summarises long
+                  descriptions, translates text and produces general safety guidance. It never
+                  verifies an incident, dispatches a team or diagnoses an injury — administrators
+                  approve every classification.
+                </p>
+              </div>
+            </div>
+            <ol className="space-y-2">
+              {STAGES.map(([title, body], i) => (
+                <li key={title} className="flex gap-3 rounded-xl border border-border bg-card p-4">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy-900 text-[11px] font-bold text-white dark:bg-white/10">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="text-[13px] font-semibold text-foreground">{title}</p>
+                    <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="mt-10 rounded-xl border border-border bg-muted/40 p-5">
+            <p className="flex items-center gap-2 text-[12.5px] font-semibold text-foreground">
+              <Building2 className="h-4 w-4 text-signal-600" /> Honest scope
+            </p>
+            <p className="mt-1.5 text-[12.5px] leading-relaxed text-muted-foreground">
+              This build is a demonstration platform. Sample incidents, resources and volunteers are
+              labelled <strong className="text-foreground">DEMO DATA</strong> and never mixed with
+              genuine reports. RAKSHA360 does not contact real emergency responders, and it does not
+              replace official emergency services. SMS, email and push delivery require separately
+              configured services — until then, notifications are in-app only.
+            </p>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
